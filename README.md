@@ -1,9 +1,9 @@
-`@EnableGcpHttpSession(bucket = "session.bucket.name")`
+`@EnableGcsHttpSession(bucket = "session.bucket.name")`
 
 ```
 <dependency>
     <groupId>wtf.the</groupId>
-    <artifactId>spring-session-gcp</artifactId>
+    <artifactId>spring-session-gcs</artifactId>
     <version>1.0-SNAPSHOT</version>
 </dependency>
 ```
