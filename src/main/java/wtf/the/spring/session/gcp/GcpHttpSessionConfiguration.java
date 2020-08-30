@@ -2,6 +2,7 @@ package wtf.the.spring.session.gcp;
 
 import com.google.cloud.storage.Storage;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportAware;
 import org.springframework.core.annotation.AnnotationAttributes;
 import org.springframework.core.type.AnnotationMetadata;
@@ -11,6 +12,7 @@ import org.springframework.session.config.annotation.web.http.SpringHttpSessionC
 
 import static java.util.Objects.requireNonNull;
 
+@Configuration
 public class GcpHttpSessionConfiguration extends SpringHttpSessionConfiguration implements ImportAware {
 
     private String bucket = null;
