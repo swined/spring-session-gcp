@@ -1,7 +1,6 @@
 package wtf.the.spring.session.gcp;
 
-import com.google.cloud.storage.Bucket;
-import com.google.cloud.storage.StorageOptions;
+import com.google.cloud.storage.Storage;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ImportAware;
 import org.springframework.core.annotation.AnnotationAttributes;
@@ -14,21 +13,17 @@ import static java.util.Objects.requireNonNull;
 
 public class GcpHttpSessionConfiguration extends SpringHttpSessionConfiguration implements ImportAware {
 
-    private Bucket bucket = null;
+    private String bucket = null;
 
     @Override
     public void setImportMetadata(AnnotationMetadata meta) {
-        bucket = StorageOptions
-            .getDefaultInstance()
-            .getService()
-            .get(AnnotationAttributes
-                .fromMap(meta.getAnnotationAttributes(EnableGcpHttpSession.class.getName()))
-                .getString("bucket")
-            );
+        var map = meta.getAnnotationAttributes(EnableGcpHttpSession.class.getName());
+        var attrs = requireNonNull(AnnotationAttributes.fromMap(map));
+        bucket = attrs.getString("bucket");
     }
 
     @Bean
-    public SessionRepository<MapSession> sessionRepository() {
-        return new GcpSessionRepository(requireNonNull(bucket));
+    public SessionRepository<MapSession> sessionRepository(Storage storage) {
+        return new GcpSessionRepository(storage.get(bucket));
     }
 }
