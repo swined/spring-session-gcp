@@ -6,7 +6,6 @@ import com.google.cloud.storage.Bucket;
 import org.springframework.session.MapSession;
 import org.springframework.session.SessionRepository;
 
-import java.io.IOException;
 import java.util.Optional;
 
 import static java.util.Objects.requireNonNull;
@@ -32,12 +31,12 @@ public class GcpSessionRepository implements SessionRepository<MapSession> {
     }
 
     @Override
-    public MapSession getSession(String id) {
+    public MapSession findById(String id) {
         return Optional.ofNullable(bucket.get(id)).map(blob -> (MapSession)deserialize(bucket.getStorage().readAllBytes(blob.getBlobId()))).orElse(null);
     }
 
     @Override
-    public void delete(String id) {
+    public void deleteById(String id) {
         bucket.get(id).delete();
     }
 }
