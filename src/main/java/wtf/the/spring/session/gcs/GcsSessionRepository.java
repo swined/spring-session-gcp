@@ -1,4 +1,4 @@
-package wtf.the.spring.session.gcp;
+package wtf.the.spring.session.gcs;
 
 import com.google.cloud.storage.BlobId;
 import com.google.cloud.storage.BlobInfo;
@@ -12,11 +12,11 @@ import static java.util.Objects.requireNonNull;
 import static org.springframework.util.SerializationUtils.deserialize;
 import static org.springframework.util.SerializationUtils.serialize;
 
-public class GcpSessionRepository implements SessionRepository<MapSession> {
+public class GcsSessionRepository implements SessionRepository<MapSession> {
 
     private final Bucket bucket;
 
-    public GcpSessionRepository(Bucket bucket) {
+    public GcsSessionRepository(Bucket bucket) {
         this.bucket = requireNonNull(bucket);
     }
 

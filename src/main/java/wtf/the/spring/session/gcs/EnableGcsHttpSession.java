@@ -1,4 +1,4 @@
-package wtf.the.spring.session.gcp;
+package wtf.the.spring.session.gcs;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
@@ -11,9 +11,9 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 @Retention(RUNTIME)
 @Target(TYPE)
-@Import(GcpHttpSessionConfiguration.class)
+@Import(GcsHttpSessionConfiguration.class)
 @Configuration
-public @interface EnableGcpHttpSession {
+public @interface EnableGcsHttpSession {
 
     String bucket();
 
